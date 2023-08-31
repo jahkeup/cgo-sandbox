@@ -17,8 +17,8 @@ import (
 var logObject = false
 
 type Callbacks struct {
-	One func()
-	Two func(x int)
+	One   func()
+	Two   func(x int)
 	Three func(x int, s string)
 }
 

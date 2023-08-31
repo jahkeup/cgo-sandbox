@@ -1,6 +1,11 @@
 go = go
+goimports = goimports
+golangci_lint = golangci-lint
+
 V = -v
 X = -x
+
+GO_PKG_PATH=github.com/jahkeup/cgo-sandbox
 
 .PHONY: build
 
@@ -16,3 +21,11 @@ test:
 
 run-all: build
 	./ci/run-all.sh ./build
+
+fmt:: goimports
+
+goimports imports:
+	$(goimports) -w -local $(GO_PKG_PATH) .
+
+lint:
+	$(golangci_lint) run

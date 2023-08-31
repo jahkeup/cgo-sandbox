@@ -8,8 +8,8 @@ import (
 func main() {
 	log.Println("invoking callbacks")
 	InvokeCallbacks(&Callbacks{
-		One: callbackOne,
-		Two: callbackTwo,
+		One:   callbackOne,
+		Two:   callbackTwo,
 		Three: callbackThree,
 	})
 
@@ -20,6 +20,18 @@ func main() {
 		One: func() {
 			log.Println("lambdaOne called")
 		},
+		Two: func(x int) {
+			log.Printf("lambdaTwo called with x:%d", x)
+		},
+		Three: func(x int, s string) {
+			log.Printf("lambdaThree called with x:%d s:%q", x, s)
+		},
+	})
+
+	fmt.Fprintln(log.Writer()) // separate output
+
+	log.Println("invoking lambda callbacks (partial)")
+	InvokeCallbacks(&Callbacks{
 		Two: func(x int) {
 			log.Printf("lambdaTwo called with x:%d", x)
 		},
